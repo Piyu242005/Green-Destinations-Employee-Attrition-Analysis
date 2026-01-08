@@ -2,6 +2,10 @@
 
 ![Green Destinations Logo](greendestination+logo.png)
 
+## Project Objective
+
+![Project Objective](Project%20Objective.jpg)
+
 ## Overview
 
 This project analyzes employee attrition for **Green Destinations** to identify patterns and potential risk factors. The dataset contains employee details such as age, income, and years at the company. OPUS is used to assist with data summarization, insight generation, and report formatting.
