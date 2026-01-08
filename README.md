@@ -111,7 +111,7 @@ Green Destinations/
 
 ## Author
 
-Analysis performed with OPUS AI assistance for Green Destinations HR Department
+Analysis performed by **Piyu** with OPUS AI assistance for Green Destinations HR Department
 
 ---
 
