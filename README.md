@@ -6,6 +6,23 @@
 
 ![Project Objective](Project%20Objective.jpg)
 
+## Screenshot Gallery
+
+![Load and Explore the Data](Screenshot%20Gallery/1.%20Load%20and%20Explore%20the%20Data.png)
+
+![Calculate Attrition Rate](Screenshot%20Gallery/2.%20Calculate%20Attrition%20Rate.png)
+
+![Factor Analysis Age vs Attrition](Screenshot%20Gallery/3.%20Factor%20Analysis%20Age%20vs%20Attrition.png)
+
+![Factor Analysis Years at Company vs Attrition](Screenshot%20Gallery/4.%20Factor%20Analysis%20Years%20at%20Company%20vs%20Attrition.png)
+
+![Factor Analysis Monthly Income vs Attrition](Screenshot%20Gallery/5.%20Factor%20Analysis%20Monthly%20Income%20vs%20Attrition.png)
+
+![Summary & Key Findings](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings.png)
+
+![Summary & Key Findings (2)](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings%20(2).png)
+
+
 ## Overview
 
 This project analyzes employee attrition for **Green Destinations** to identify patterns and potential risk factors. The dataset contains employee details such as age, income, and years at the company. OPUS is used to assist with data summarization, insight generation, and report formatting.
