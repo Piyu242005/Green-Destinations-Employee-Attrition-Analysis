@@ -1,126 +1,132 @@
-﻿# 🌍 Green Destinations Employee Attrition Analysis
+﻿<!-- Animated Header -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=30&pause=1000&color=2E8B57&center=true&vCenter=true&width=800&height=60&lines=Employee+Attrition+Machine+Learning;Data-Driven+HR+Insights;Green+Destinations" alt="Typing SVG" />
+</div>
 
-> A comprehensive data science project analyzing employee turnover to identify key retention drivers for Green Destinations.
+# 🌍 Green Destinations Employee Attrition System
 
-![Green Destinations Logo](greendestination+logo.png)
-
----
-
-## 🛑 Problem Statement
-
-Employee attrition is a critical challenge for modern businesses. High turnover rates not only incur significant recruitment and training costs but also disrupt team productivity, institutional knowledge, and overall morale. Understanding **why** employees leave and predicting **who** might leave next enables proactive HR strategies to improve retention and organizational stability.
+> A job-ready Machine Learning and Business Intelligence project turning raw HR data into **actionable retention strategies**. Not just graphs—a complete decision-making HR engine.
 
 ---
 
-## 🎯 Objectives
+## 🛑 1. Problem Statement & Business Context
 
-![Project Objective](Project%20Objective.jpg)
+Employee attrition is a massive hidden cost for modern businesses. High turnover rates incur significant recruitment, onboarding, and training costs while disrupting team productivity. 
 
-- **Calculate Attrition Rate:** Understand the overall employee turnover.
-- **Identify Key Drivers:** Pinpoint the specific workplace factors (age, years at company, income) that contribute most to an employee's decision to leave.
-- **Provide Actionable Insights:** Deliver data-driven recommendations to the HR department for improving employee retention.
-- **Leverage AI Tools:** Use OPUS for enhanced exploratory analysis and documentation support.
+**Our Goal:** Move beyond guessing. We need to predict **who** is likely to leave and understand exactly **why** so that HR can deploy targeted, data-backed interventions to save money and retain top talent.
 
 ---
 
-## 📊 Dataset
+## 📊 2. The Dataset
 
-The analysis is based on a comprehensive HR dataset containing **1,470 employee records**.
+The analysis is based on a comprehensive HR dataset containing **1,470 employee records**, mapping directly to key organizational pillars:
 
-- **File:** `greendestination (1) (1).csv`
-- **Features:** 35+ columns encompassing:
-  - **Demographics:** Age, Gender
-  - **Compensation:** Monthly Income
-  - **Work Experience:** Years at Company, Total Working Years
-  - **Work Environment:** OverTime, Environment Satisfaction
+- **Demographics:** Age, Gender
+- **Compensation & Roles:** Monthly Income, Job Level, Department
+- **Work Experience:** Years at Company, Total Working Years
+- **Work Environment:** OverTime, Environment Satisfaction
 
 ---
 
-## 🛠️ Methodology
+## 🔍 3. Exploratory Data Analysis (EDA)
 
-1. **✅ Data Cleaning & Preprocessing:** Handled missing values and structured data for analysis.
-2. **📊 Exploratory Data Analysis (EDA):** Uncovered bivariate and multivariate relationships between HR metrics and attrition.
-3. **📈 Attrition Rate Calculation:** Determined baseline turnover metrics.
-4. **🔗 Factor Correlation Insights:** Analyzed key demographic and professional indicators.
-5. **🤖 OPUS-Assisted Interpretation:** Used OPUS for insight generation and narrative framing.
+Before building predictive models, a deep-dive EDA revealed our baseline metrics and high-risk segments.
 
----
+### Key Metrics Uncovered
+- **Overall Attrition Rate:** 16.12%
+- **Average Tenure for Leavers:** 5.1 Years (vs 7.4 for Stayers)
+- **High-Risk Segment 1:** Employees aged 18-25 (35.8% attrition rate)
+- **High-Risk Segment 2:** Tenure 0-2 years (29.8% attrition rate)
+- **High-Risk Segment 3:** Monthly Income <$3K (28.6% attrition rate)
 
-## 📉 Visualizations & Screenshot Gallery
-
-Here are the key steps and findings from the exploratory data analysis:
-
-| Load and Explore Data | Calculate Attrition Rate |
-| :---: | :---: |
-| ![Load and Explore](Screenshot%20Gallery/1.%20Load%20and%20Explore%20the%20Data.png) | ![Attrition Rate](Screenshot%20Gallery/2.%20Calculate%20Attrition%20Rate.png) |
-
-| Age vs Attrition | Years at Company vs Attrition |
-| :---: | :---: |
-| ![Age](Screenshot%20Gallery/3.%20Factor%20Analysis%20Age%20vs%20Attrition.png) | ![Years at Company](Screenshot%20Gallery/4.%20Factor%20Analysis%20Years%20at%20Company%20vs%20Attrition.png) |
-
-| Monthly Income vs Attrition | Summary & Key Findings |
-| :---: | :---: |
-| ![Monthly Income](Screenshot%20Gallery/5.%20Factor%20Analysis%20Monthly%20Income%20vs%20Attrition.png) | ![Key Findings](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings.png) |
-
-*(See [Summary & Key Findings (2)](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings%20(2).png) for additional insights.)*
+*(Insights derived from Python Pandas, Seaborn & Matplotlib visualizations inside the primary notebook).*
 
 ---
 
-## 📈 Results & Key Findings
+## ⚙️ 4. Feature Engineering & Class Imbalance
 
-### Overall Attrition Rate: **16.12%**
+Attrition data is notoriously imbalanced (only ~16% of employees leave). We applied rigorous Data Science techniques to prepare the data:
 
-| Metric | Employees Who Left | Employees Who Stayed |
-| :--- | :---: | :---: |
-| **Average Age** | 33.6 years | 37.6 years |
-| **Years at Company (avg)** | 5.1 years | 7.4 years |
-| **Monthly Income (avg)** | $4,787 | $6,833 |
-
-### ⚠️ High-Risk Groups Identified:
-- **Age 18-25:** **35.8%** attrition rate
-- **Tenure 0-2 years:** **29.8%** attrition rate
-- **Monthly Income <$3K:** **28.6%** attrition rate
+1. **One-Hot Encoding** for categorical features.
+2. **StandardScaling** for numeric variable normalization.
+3. **SMOTE (Synthetic Minority Over-sampling Technique)** applied to handle the 84:16 class imbalance, ensuring our models don't just predict "No" for everyone.
 
 ---
 
-## 💡 Business Recommendations
+## 🧠 5. Machine Learning Models
 
-1. **🎯 Focus on Young Employees (18-25):** Implement mentorship programs and career development initiatives to engage younger staff.
-2. **📈 Retention for New Hires:** Create strong onboarding and engagement programs specifically targeting the first 2 years of employment.
-3. **💵 Review Compensation:** Consider salary adjustments and competitive benchmarking for lower-income positions.
-4. **🔍 Exit Interviews:** Conduct detailed exit interviews to understand the nuanced, specific reasons behind departures.
+We modeled the data to predict attrition using state-of-the-art algorithms:
 
----
+### Random Forest Classifier
+- A robust ensemble method that performed excellently off-the-shelf.
+- Provided high interpretability via `feature_importances_`.
+- **Accuracy:** Tested & Optimized via Train/Test Splits.
+- Evaluated via precision, recall, and a **Confusion Matrix** to understand false positives vs. false negatives.
 
-## 💻 Tech Stack
+### Logistic Regression
+- Used as an interpretable baseline model to measure the linear bounds of our feature set.
 
-| Category | Tools |
-|----------|-------|
-| **Programming** | Python 3.x |
-| **Data Analysis** | Pandas, NumPy |
-| **Visualization** | Matplotlib, Seaborn |
-| **Machine Learning** | Scikit-learn (optional step) |
-| **AI Assistant** | OPUS |
+**(Results and Feature Importance charts are documented in `GreenDestination.ipynb`)**
 
 ---
 
-## 📂 Project Structure
+## 📈 6. Results & Model Interpretation
+
+By extracting the Feature Importance from the Random Forest, the model literally tells us **why** employees leave:
+
+1. **Monthly Income:** Lower brackets are vastly more likely to quit.
+2. **OverTime:** Employees working consistent overtime show significantly higher burnout.
+3. **Age & Tenure:** Junior staff in their first 2 years are the most volatile.
+
+> *"Employees with a low salary combined with high overtime have functionally double the attrition risk."*
+
+---
+
+## 🎯 7. Strong Business Recommendations
+
+Insights without action are useless. Based on the ML Model, the recommended HR strategy is:
+
+**1. Target the 18-25 Segment & New Hires (0-2 Years)**  
+Revamp the 90-day onboarding window. Assign senior mentors to younger staff immediately to increase early engagement.
+
+**2. Restructure Compensation & Limit OverTime**  
+The model explicitly flags OverTime + Low Salary as a toxic combination. Run an audit on entry-level compensation bands and forcibly cap weekly overtime hours for high-risk individuals.
+
+**3. Conduct Targeted 'Stay Interviews'**  
+Use the predictive model to flag top performers at >60% risk. Hold proactive "stay interviews" with them *before* they resign.
+
+---
+
+## 🌐 8. Interactive Streamlit Dashboard
+
+To make this useful for non-technical recruiters and HR Managers, a live **HR Attrition Dashboard** was developed.
+
+### Features:
+- Filter attrition rates by department.
+- Real-time **Risk Predictor Tool** allowing HR to plug in employee parameters (Age, Salary, Tenure) to get an instant % risk assessment.
+
+> Run the dashboard locally: `streamlit run app.py`
+
+---
+
+## 💻 9. Tech Stack & Project Structure
+
+- **Data Manipulation & Viz:** Pandas, NumPy, Matplotlib, Seaborn
+- **Machine Learning Analysis:** Scikit-Learn, Imbalanced-Learn (SMOTE)
+- **Web App UI:** Streamlit
 
 ```text
 Green-Destinations-Employee-Attrition-Analysis/
 │
 ├── README.md                       # Project documentation
-├── CODE_OF_CONDUCT.md              # Community guidelines
-├── GreenDestination.ipynb          # Main EDA and analysis notebook
-├── greendestination (1) (1).csv    # Raw HR dataset
-├── greendestination+logo.png       # Company logo
-├── Project Objective.jpg           # Project objective image
-└── Screenshot Gallery/             # Project visualizations and assets
+├── app.py                          # Streamlit Interactive Dashboard
+├── GreenDestination.ipynb          # Advanced ML & EDA Notebook
+└── greendestination (1) (1).csv    # Raw HR dataset
 ```
 
 ---
 
-## 🚀 How to Run
+## 🚀 10. How to Run
 
 1. **Clone the repository:**
    ```bash
@@ -129,24 +135,23 @@ Green-Destinations-Employee-Attrition-Analysis/
    ```
 
 2. **Install dependencies:**
-   Ensure Python 3.x is installed, then run:
    ```bash
-   pip install pandas numpy matplotlib seaborn scikit-learn
+   pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn streamlit
    ```
 
-3. **Launch the Notebook:**
-   Open the repository in VS Code or Jupyter Notebook, and run `GreenDestination.ipynb` to view or reproduce the analysis.
+3. **Launch the ML Notebook:**
+   ```bash
+   jupyter notebook GreenDestination.ipynb
+   ```
+
+4. **Launch the HR Dashboard:**
+   ```bash
+   streamlit run app.py
+   ```
 
 ---
 
-## 🔮 Future Improvements
-
-- **Advanced Modeling:** Implement predictive Machine Learning algorithms (like Random Forest or XGBoost) to predict individual attrition risk.
-- **Interactive Dashboard:** Develop an HR dashboard using Streamlit or Power BI for real-time tracking.
-
----
-
-## Let's Connect & Collaborate
+## 📧 Let's Connect & Collaborate
 
 <div align="center">
 
@@ -167,6 +172,6 @@ Green-Destinations-Employee-Attrition-Analysis/
 
 Made with 💚 by **Piyush Ramteke** © 2026
 
-![Visitors](https://api.visitorbadge.io/api/visitors?path=Piyu242005%2FGreen-Destinations-Employee-Attrition-Analysis&countColor=%23c8ff00)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=Piyu242005%2FPiyu-Portfolio-Website&countColor=%23c8ff00)
 
 </div>
