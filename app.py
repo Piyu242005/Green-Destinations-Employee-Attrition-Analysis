@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import joblib
+import os
 
 # Set Streamlit config
 st.set_page_config(page_title="HR Attrition Dashboard", layout="wide", page_icon="👥")
@@ -12,6 +14,15 @@ def load_data():
     return df
 
 df = load_data()
+
+# Load Predictive ML Model
+@st.cache_resource
+def load_model():
+    if os.path.exists("model.pkl"):
+        return joblib.load("model.pkl")
+    return None
+
+model = load_model()
 
 # Header
 st.title("🌍 Green Destinations: HR Attrition Predictor & Dashboard")
@@ -38,14 +49,36 @@ st.success("""
 3. **Compensation & Overtime:** Employees working overtime with lower salaries have a 2x risk. Consider restructuring salary bands and limiting overtime.
 """)
 
-st.sidebar.markdown("### ⚙️ Risk Predictor Tool")
-st.sidebar.info("Select employee params to predict risk (Mockup UI)")
-age = st.sidebar.slider("Age", 18, 60, 30)
-salary = st.sidebar.slider("Monthly Income ($)", 1000, 20000, 4500)
-years = st.sidebar.slider("Years at Company", 0, 40, 3)
+st.sidebar.markdown("### 🤖 ML Risk Predictor Tool")
 
-if st.sidebar.button("Predict Risk"):
-    if age < 30 and salary < 4000:
-        st.sidebar.error("🔴 HIGH RISK (Est. Probability: 75%)")
-    else:
-        st.sidebar.success("🟢 LOW RISK (Est. Probability: 15%)")
+if model is None:
+    st.sidebar.warning("Model not found. Please run `python train_model.py` first to train and save the ML model.")
+else:
+    st.sidebar.info("Select employee params to predict risk using Random Forest:")
+    
+    # User Inputs matching the features chosen for ML model
+    age = st.sidebar.slider("Age", 18, 60, 30)
+    salary = st.sidebar.slider("Monthly Income ($)", 1000, 20000, 4500)
+    years = st.sidebar.slider("Years at Company", 0, 40, 3)
+    overtime = st.sidebar.selectbox("OverTime", ["No", "Yes"])
+
+    if st.sidebar.button("Predict Risk"):
+        # Convert inputs into format required by pipeline
+        input_data = pd.DataFrame([{
+            'Age': age,
+            'MonthlyIncome': salary,
+            'YearsAtCompany': years,
+            'OverTime': overtime
+        }])
+        
+        # Predict probability of Attrition
+        risk_prob = model.predict_proba(input_data)[0][1] # Probability for class 1 (Yes)
+        risk_percent = risk_prob * 100
+        
+        # Output prediction
+        if risk_percent >= 50:
+            st.sidebar.error(f"🔴 HIGH RISK (Est. Probability: {risk_percent:.1f}%)")
+            st.sidebar.markdown("**Recommendation:** Immediate HR engagement needed. High likelihood of attrition. Verify if overtime can be reduced and check compensation alignment.")
+        else:
+            st.sidebar.success(f"🟢 LOW RISK (Est. Probability: {risk_percent:.1f}%)")
+            st.sidebar.markdown("**Recommendation:** Monitor per regular cycles. Satisfactory retention indicators.")

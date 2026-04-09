@@ -27,6 +27,7 @@ Employee attrition is a critical challenge for modern businesses. High turnover 
 - **Identify Key Drivers:** Pinpoint the specific workplace factors (age, years at company, income) that contribute most to an employee's decision to leave.
 - **Provide Actionable Insights:** Deliver data-driven recommendations to the HR department for improving employee retention.
 - **Leverage AI Tools:** Use OPUS for enhanced exploratory analysis and documentation support.
+- **Predictive Modeling:** Build an interactive machine learning dashboard to forecast individual attrition risk.
 
 ---
 
@@ -49,7 +50,8 @@ The analysis is based on a comprehensive HR dataset containing **1,470 employee 
 2. **📊 Exploratory Data Analysis (EDA):** Uncovered bivariate and multivariate relationships between HR metrics and attrition.
 3. **📈 Attrition Rate Calculation:** Determined baseline turnover metrics.
 4. **🔗 Factor Correlation Insights:** Analyzed key demographic and professional indicators.
-5. **🤖 OPUS-Assisted Interpretation:** Used OPUS for insight generation and narrative framing.
+5. **🤖 Predictive Machine Learning:** Trained a Random Forest Classifier using Scikit-Learn (handling class imbalance with SMOTE).
+6. **🌐 Interactive Deployment:** Developed a user-friendly Streamlit web app (`app.py`) embedding the trained model for real-time HR risk prediction.
 
 ---
 
@@ -70,6 +72,10 @@ Here are the key steps and findings from the exploratory data analysis:
 | ![Monthly Income](Screenshot%20Gallery/5.%20Factor%20Analysis%20Monthly%20Income%20vs%20Attrition.png) | ![Key Findings](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings.png) |
 
 *(See [Summary & Key Findings (2)](Screenshot%20Gallery/6.%20Summary%20&%20Key%20Findings%20(2).png) for additional insights.)*
+
+### 🤖 Interactive ML Predictor Dashboard
+
+![Streamlit Dashboard](Screenshot%20Gallery/Streamlit%20web%20dashboard..png)
 
 ---
 
@@ -103,16 +109,20 @@ Here are the key steps and findings from the exploratory data analysis:
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=for-the-badge&logo=pandas)
-![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-013243?style=for-the-badge&logo=numpy)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-11557C?style=for-the-badge)
-![Seaborn](https://img.shields.io/badge/Seaborn-Statistical%20Plots-4C72B0?style=for-the-badge)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E?style=for-the-badge&logo=scikitlearn)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ---
 
 ## 📂 Project Structure
 
 ```text
 Green-Destinations-Employee-Attrition-Analysis/
+│
+├── README.md                       # Project documentation
+├── CODE_OF_CONDUCT.md              # Community guidelines
+├── GreenDestination.ipynb          # Main EDA and analysis notebook
+├── app.py                          # Streamlit deployment application
+├── train_model.py                  # Random forest model training script
+├── model.pkl                       # Serialized machine learning model
 │
 ├── README.md                       # Project documentation
 ├── CODE_OF_CONDUCT.md              # Community guidelines
@@ -132,19 +142,26 @@ Green-Destinations-Employee-Attrition-Analysis/
    git clone https://github.com/yourusername/Green-Destinations-Employee-Attrition-Analysis.git
    cd Green-Destinations-Employee-Attrition-Analysis
    ```
-
-2. **Install dependencies:**
-   Ensure Python 3.x is installed, then run:
-   ```bash
-   pip install pandas numpy matplotlib seaborn scikit-learn
+ imbalanced-learn joblib streamlit
    ```
 
-3. **Launch the Notebook:**
-   Open the repository in VS Code or Jupyter Notebook, and run `GreenDestination.ipynb` to view or reproduce the analysis.
+3. **Train the ML Model:**
+   ```bash
+   python train_model.py
+   ```
+
+4. **Launch the Dashboard:**
+   ```bash
+   streamlit run app.py
+   ```
 
 </details>
 ---
 
+## 🔮 Future Improvements
+
+- **Deep Learning / Neural Networks:** Evaluate if advanced neural nets can capture even more nuanced attrition triggers compared to Random Forest.
+- **Automated Email Alerts:** Integrate email notifications to proactively ping HR when the Streamlit app calculates an employee's risk > 70%
 ## 🔮 Future Improvements
 
 - **Advanced Modeling:** Implement predictive Machine Learning algorithms (like Random Forest or XGBoost) to predict individual attrition risk.
