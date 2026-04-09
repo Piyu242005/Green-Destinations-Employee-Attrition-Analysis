@@ -101,14 +101,12 @@ Here are the key steps and findings from the exploratory data analysis:
 
 ## 💻 Tech Stack
 
-| Category | Tools |
-|----------|-------|
-| **Programming** | Python 3.x |
-| **Data Analysis** | Pandas, NumPy |
-| **Visualization** | Matplotlib, Seaborn |
-| **Machine Learning** | Scikit-learn (optional step) |
-| **AI Assistant** | OPUS |
-
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=for-the-badge&logo=pandas)
+![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-013243?style=for-the-badge&logo=numpy)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-11557C?style=for-the-badge)
+![Seaborn](https://img.shields.io/badge/Seaborn-Statistical%20Plots-4C72B0?style=for-the-badge)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E?style=for-the-badge&logo=scikitlearn)
 ---
 
 ## 📂 Project Structure
@@ -126,8 +124,8 @@ Green-Destinations-Employee-Attrition-Analysis/
 ```
 
 ---
-
-## 🚀 How to Run
+<details>
+  <summary> 🚀 How to Run</summary>
 
 1. **Clone the repository:**
    ```bash
@@ -144,6 +142,7 @@ Green-Destinations-Employee-Attrition-Analysis/
 3. **Launch the Notebook:**
    Open the repository in VS Code or Jupyter Notebook, and run `GreenDestination.ipynb` to view or reproduce the analysis.
 
+</details>
 ---
 
 ## 🔮 Future Improvements
