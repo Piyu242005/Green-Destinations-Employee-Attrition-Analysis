@@ -146,11 +146,27 @@ Green-Destinations-Employee-Attrition-Analysis/
 
 ---
 
-## 👨‍💻 Author
+## Let's Connect & Collaborate
 
-Analysis performed by **Piyu** with OPUS AI assistance for the Green Destinations HR Department.
+<div align="center">
 
-🔗 [GitHub Profile](https://github.com/yourusername) | 🔗 [LinkedIn Profile](https://linkedin.com/in/yourprofile)
+[![Email](https://img.shields.io/badge/📧_Email-piyu.143247@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:piyu.143247@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Piyush_Ramteke-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/piyush-ramteke-24-mylife)
+[![GitHub](https://img.shields.io/badge/🐙_GitHub-Piyu242005-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Piyu242005)
+[![Instagram](https://img.shields.io/badge/📸_Instagram-my.life__24143-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/my.life_24143/)
+
+</div>
 
 ---
-*If you found this project helpful, please consider giving it a ⭐!*
+
+<div align="center">
+
+### ⭐ If you find this repository helpful, dropping a star would mean a lot!
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%" />
+
+Made with 💚 by **Piyush Ramteke** © 2026
+
+![Visitors](https://api.visitorbadge.io/api/visitors?path=Piyu242005%2FGreen-Destinations-Employee-Attrition-Analysis&countColor=%23c8ff00)
+
+</div>
