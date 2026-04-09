@@ -34,6 +34,7 @@ To help HR:
 
 👉
 **“This project predicts employee attrition and helps companies take data-driven decisions to retain employees.”**
+
 ----
 
 | Item | Explanation |
