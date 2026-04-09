@@ -1,4 +1,11 @@
-﻿# 🌍 Green Destinations Employee Attrition Analysis
+﻿<!-- HEADER -->
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=200&section=header&text=Employee%20Attrition%20Prediction%20System&fontSize=40&fontAlignY=35&fontColor=ffffff&desc=Green%20Destinations%20HR%20Analytics%20%7C%20AI-Powered%20Retention%20Insights&descAlignY=55&descAlign=50" width="100%"/>
+
+</div>
+
+# 🌍 Green Destinations Employee Attrition Analysis
 
 > A comprehensive data science project analyzing employee turnover to identify key retention drivers for Green Destinations.
 
