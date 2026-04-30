@@ -103,6 +103,12 @@ The analysis is based on a comprehensive HR dataset containing **1,470 employee 
 ### 🔍 Model Explainability (SHAP)
 We use **SHAP (SHapley Additive exPlanations)** to break down individual risk scores. This enables HR to understand the exact factors contributing to a "High Risk" prediction for a specific employee.
 
+### 🖥️ System Interface Gallery
+
+| FastAPI Backend Service | Upgraded Streamlit Dashboard |
+| :---: | :---: |
+| ![FastAPI Backend](Screenshot%20Gallery/FastAPI%20backend.png) | ![Streamlit Dashboard](Screenshot%20Gallery/Streamlit%20dashboard.png) |
+
 ---
 
 ## 💻 Tech Stack

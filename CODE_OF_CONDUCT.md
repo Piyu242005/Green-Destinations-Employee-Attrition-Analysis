@@ -32,7 +32,7 @@ python -m uvicorn app.api:app --reload
 #### 2. Start the Frontend (Dashboard)
 Open a **second terminal** and run:
 ```bash
-streamlit run app/main.py
+python -m streamlit run app/main.py
 ```
 *This opens the visual dashboard in your web browser where you can interact with the data.*
 

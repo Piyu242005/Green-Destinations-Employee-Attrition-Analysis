@@ -17,7 +17,12 @@ except:
 
 @app.get("/")
 def home():
-    return {"message": "Attrition Prediction API is active", "status": "Ready" if model else "Model Not Found"}
+    return {
+        "message": "Attrition Prediction API is active and running successfully.",
+        "developer": "Piyush Ramteke",
+        "role": "Data Scientist | AI/ML Engineer",
+        "status": "Ready to serve predictions" if model else "Model Not Found"
+    }
 
 @app.post("/predict")
 def predict(data: dict):

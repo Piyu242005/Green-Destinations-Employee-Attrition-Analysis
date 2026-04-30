@@ -23,6 +23,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 st.title("🌱 Green Destinations: Strategic Attrition Intelligence")
+st.markdown("#### Developed by: Piyush Ramteke")
 st.markdown("---")
 
 # Load model
@@ -68,6 +69,9 @@ if st.button("Analyze Attrition Risk"):
         "JobRole": role,
         "EnvironmentSatisfaction": env_sat,
         "JobSatisfaction": job_sat,
+        "MonthlyRate": 14313,
+        "DailyRate": 802,
+        "HourlyRate": 66,
         "BusinessTravel": "Travel_Rarely",
         "DistanceFromHome": 5,
         "Education": 3,
@@ -118,7 +122,24 @@ if st.button("Analyze Attrition Risk"):
         # Plot
         fig, ax = plt.subplots(figsize=(10, 8))
         feature_names = model.named_steps['preprocessor'].get_feature_names_out()
-        shap.bar_plot(shap_values[1][0], feature_names=feature_names, max_display=10, show=False)
+        
+        # Handle different SHAP output formats robustly
+        import numpy as np
+        if isinstance(shap_values, list):
+            # List of arrays (one per class)
+            val_to_plot = shap_values[1][0]
+        elif hasattr(shap_values, "shape") and len(shap_values.shape) == 3:
+            # 3D Array (samples, features, classes)
+            val_to_plot = shap_values[0, :, 1]
+        else:
+            # 2D Array or Explanation object
+            val_to_plot = shap_values[0]
+            
+        # Ensure it's a 1D array for the legacy bar_plot
+        if hasattr(val_to_plot, "values"):
+            val_to_plot = val_to_plot.values
+            
+        shap.bar_plot(val_to_plot, feature_names=feature_names, max_display=10, show=False)
         plt.tight_layout()
         st.pyplot(fig)
         st.write("👆 Positive values (right) increase attrition risk, negative values (left) decrease it.")
