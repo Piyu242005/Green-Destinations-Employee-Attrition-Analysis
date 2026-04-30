@@ -1,49 +1,51 @@
-Here is a **short, simple, and easy-to-understand explanation**:
+# 🌍 Project Summary & Execution Guide
+
+Here is a **short, simple, and easy-to-understand explanation** of this system:
 
 ---
 
 ### 📊 Project Explanation (Simple)
 
-**Green Destinations Employee Attrition Analysis** is a data science project that helps understand **why employees leave a company**.
+**Green Destinations Employee Attrition Analysis** is a smart tool that helps companies understand **why employees leave** and **who might leave next**.
 
-The project analyzes employee data like:
+It analyzes data like:
+*   **Workload:** Are they working too much overtime?
+*   **Pay:** Is their salary lower than others in similar roles?
+*   **Experience:** How many years have they been with the company?
+*   **Satisfaction:** Are they happy with their work environment?
 
-* Age
-* Salary
-* Years at company
-* Work conditions
-
-It uses:
-
-* **Data analysis (EDA)** to find patterns
-* **Machine Learning** to predict which employees are likely to leave
+**The Result:** It gives HR a "Risk Score" for each employee and explains the specific reasons for that risk, helping the company keep its best people.
 
 ---
 
-### 🎯 Goal
+### 🚀 How to Run the Project
 
-To help HR:
+To see the project in action, follow these steps:
 
-* Identify high-risk employees
-* Understand key reasons for attrition
-* Take actions to improve employee retention
+#### 1. Start the Backend (API)
+Open a terminal and run:
+```bash
+python -m uvicorn app.api:app --reload
+```
+*This starts the "brain" of the project that handles the math and predictions.*
+
+#### 2. Start the Frontend (Dashboard)
+Open a **second terminal** and run:
+```bash
+streamlit run app/main.py
+```
+*This opens the visual dashboard in your web browser where you can interact with the data.*
 
 ---
 
-### 💡 Simple One-Line
+### 🛠️ Technical Setup (First Time Only)
 
-👉
-**“This project predicts employee attrition and helps companies take data-driven decisions to retain employees.”**
+If you haven't installed the requirements yet, run:
+```bash
+pip install -r requirements.txt
+```
 
-----
-
-| Item | Explanation |
-|------|-------------|
-| Organization | Green Destinations (Travel & Hospitality Company) |
-| Problem Observed | Rising employee attrition leading to increased hiring costs and reduced productivity |
-| Data Source | HR employee dataset (1,470 records including demographics, salary, and work conditions) |
-| Objective 1 | Calculate overall attrition rate and identify high-risk employee segments |
-| Objective 2 | Analyze key drivers of attrition using data and machine learning |
-| Key Factors Analyzed | Age, Years at Company, Monthly Income, OverTime, Job Role |
-| Key Questions | 1. What is the attrition rate? <br> 2. Which employee groups are at highest risk? <br> 3. How do salary, tenure, and overtime impact attrition? |
-| Final Goal | Provide data-driven insights and predictive models to help HR reduce attrition and improve employee retention strategies |
+To retrain the model with fresh data:
+```bash
+python src/train.py
+```
