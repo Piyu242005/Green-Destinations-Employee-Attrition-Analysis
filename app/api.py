@@ -9,10 +9,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
+import os
+
 # Load the trained pipeline
 try:
-    model = joblib.load("models/model_pipeline.pkl")
-except:
+    # Use absolute path so Vercel can find it regardless of execution context
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MODEL_PATH = os.path.join(BASE_DIR, "models", "model_pipeline.pkl")
+    model = joblib.load(MODEL_PATH)
+except Exception as e:
+    print(f"Error loading model: {e}")
     model = None
 
 @app.get("/")
