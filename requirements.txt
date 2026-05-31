@@ -1,10 +1,1 @@
-fastapi
-uvicorn
-streamlit
-shap
-pandas
-scikit-learn
-imbalanced-learn
-matplotlib
-joblib
-numpy
+-r requirements-ui.txt

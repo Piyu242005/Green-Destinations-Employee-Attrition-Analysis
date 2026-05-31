@@ -7,6 +7,8 @@
 
 # 🌍 Green Destinations Employee Attrition Analysis
 
+[![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://green-destinations-employee-attrition-analysis.streamlit.app/)
+
 > **Production-Ready ML System** for predicting employee turnover with high recall and model explainability (SHAP).
 
 ![Green Destinations Logo](greendestination+logo.png)
@@ -126,14 +128,22 @@ We use **SHAP (SHapley Additive exPlanations)** to break down individual risk sc
 ```text
 Green-Destinations-Employee-Attrition-Analysis/
 │
+├── .github/workflows/  # CI/CD pipelines (Pytest)
 ├── data/               # Raw HR dataset (CSV)
 ├── models/             # Serialized .pkl files (Pipeline & SHAP background)
 ├── src/                # Core ML Logic
-│   └── train.py        # Optimized training script with threshold tuning
+│   ├── config.py       # Centralized configuration
+│   ├── features.py     # Shared feature engineering logic
+│   └── train.py        # GridSearchCV training script
 ├── app/                # Deployment Layer
 │   ├── api.py          # FastAPI REST Backend
 │   └── main.py         # Streamlit XAI Frontend
-├── requirements.txt    # Production dependencies
+├── tests/              # Unit Tests
+│   ├── test_api.py
+│   └── test_features.py
+├── requirements-api.txt # Backend dependencies
+├── requirements-ui.txt  # Frontend dependencies
+├── requirements-dev.txt # Testing dependencies
 └── Dockerfile          # Containerization for deployment
 ```
 
@@ -144,7 +154,14 @@ Green-Destinations-Employee-Attrition-Analysis/
 
 ### 1. Install Dependencies
 ```bash
-pip install -r requirements.txt
+# For API and Model Training
+pip install -r requirements-api.txt
+
+# For Streamlit UI
+pip install -r requirements-ui.txt
+
+# For Testing
+pip install -r requirements-dev.txt
 ```
 
 ### 2. Train the Model

@@ -1,13 +1,18 @@
 import pandas as pd
 import joblib
 import os
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, StratifiedKFold, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from imblearn.pipeline import Pipeline as ImbPipeline
 from imblearn.over_sampling import SMOTE
 from sklearn.metrics import classification_report, roc_auc_score
+
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src import config
+from src.features import engineer_features
 
 def build_advanced_pipeline(X):
     """Builds an ML pipeline with preprocessing and resampling."""
@@ -21,50 +26,63 @@ def build_advanced_pipeline(X):
 
     pipeline = ImbPipeline([
         ('preprocessor', preprocessor),
-        ('smote', SMOTE(random_state=42)),
-        ('classifier', RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42))
+        ('smote', SMOTE(random_state=config.RANDOM_STATE)),
+        ('classifier', RandomForestClassifier(random_state=config.RANDOM_STATE))
     ])
     return pipeline
 
 def train_and_save():
     print("Loading data...")
-    df = pd.read_csv("data/greendestination (1) (1).csv")
+    df = pd.read_csv(config.DATA_PATH)
     
     print("Engineering features...")
-    # New features for better signal
-    df['IncomePerAge'] = df['MonthlyIncome'] / df['Age']
-    df['TenureRatio'] = df['YearsAtCompany'] / (df['TotalWorkingYears'] + 1)
+    df = engineer_features(df)
     
     # Drop non-predictive columns
     X = df.drop(['Attrition', 'EmployeeCount', 'Over18', 'StandardHours', 'EmployeeNumber'], axis=1)
     y = df['Attrition'].apply(lambda x: 1 if x == 'Yes' else 0)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=config.TEST_SIZE, stratify=y, random_state=config.RANDOM_STATE
+    )
 
     print("Training model with SMOTE and Random Forest...")
+    print("Performing GridSearchCV...")
     pipeline = build_advanced_pipeline(X)
-    pipeline.fit(X_train, y_train)
+    
+    cv = StratifiedKFold(n_splits=config.CV_SPLITS, shuffle=True, random_state=config.RANDOM_STATE)
+    
+    grid_search = GridSearchCV(
+        pipeline, 
+        param_grid=config.RF_PARAM_GRID, 
+        cv=cv, 
+        scoring='recall', # Optimize for Recall
+        n_jobs=-1,
+        verbose=1
+    )
+    
+    grid_search.fit(X_train, y_train)
+    
+    print(f"Best parameters found: {grid_search.best_params_}")
+    best_model = grid_search.best_estimator_
 
     # Threshold Tuning for Recall (Recruiters want high Recall in Attrition)
-    probs = pipeline.predict_proba(X_test)[:, 1]
-    # We use a lower threshold (0.3 instead of 0.5) to catch more people likely to leave
-    threshold = 0.3
-    y_pred_tuned = (probs >= threshold).astype(int)
+    probs = best_model.predict_proba(X_test)[:, 1]
     
-    print(f"\n--- Model Performance (Threshold: {threshold}) ---")
+    y_pred_tuned = (probs >= config.MODEL_THRESHOLD).astype(int)
+    
+    print(f"\n--- Model Performance (Threshold: {config.MODEL_THRESHOLD}) ---")
     print(classification_report(y_test, y_pred_tuned))
     print(f"ROC-AUC Score: {roc_auc_score(y_test, probs):.4f}")
 
     # Ensure models directory exists
-    if not os.path.exists("models"):
-        os.makedirs("models")
+    os.makedirs(os.path.dirname(config.MODEL_PIPELINE_PATH), exist_ok=True)
 
-    model_path = "models/model_pipeline.pkl"
-    joblib.dump(pipeline, model_path)
-    print(f"\nPipeline saved to {model_path}")
+    joblib.dump(best_model, config.MODEL_PIPELINE_PATH)
+    print(f"\nPipeline saved to {config.MODEL_PIPELINE_PATH}")
     
     # Save training sample for SHAP explanations
-    X_train.head(100).to_pickle("models/shap_background.pkl")
+    X_train.head(100).to_pickle(config.SHAP_BACKGROUND_PATH)
 
 if __name__ == "__main__":
     train_and_save()

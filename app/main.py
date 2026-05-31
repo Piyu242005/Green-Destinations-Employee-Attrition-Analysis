@@ -3,8 +3,13 @@ import pandas as pd
 import joblib
 import shap
 import matplotlib.pyplot as plt
-import os
 
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src import config
+from src.features import engineer_features
 st.set_page_config(page_title="Green Destinations AI", layout="wide")
 
 # Custom CSS for premium look
@@ -29,10 +34,10 @@ st.markdown("---")
 # Load model
 @st.cache_resource
 def load_assets():
-    if not os.path.exists("models/model_pipeline.pkl"):
+    if not os.path.exists(config.MODEL_PIPELINE_PATH):
         return None, None
-    model = joblib.load("models/model_pipeline.pkl")
-    background = pd.read_pickle("models/shap_background.pkl")
+    model = joblib.load(config.MODEL_PIPELINE_PATH)
+    background = pd.read_pickle(config.SHAP_BACKGROUND_PATH)
     return model, background
 
 model, background = load_assets()
@@ -95,8 +100,7 @@ if st.button("Analyze Attrition Risk"):
     input_df = pd.DataFrame([input_data])
     
     # Feature Engineering
-    input_df['IncomePerAge'] = input_df['MonthlyIncome'] / input_df['Age']
-    input_df['TenureRatio'] = input_df['YearsAtCompany'] / (input_df['TotalWorkingYears'] + 1)
+    input_df = engineer_features(input_df)
     
     # Prediction
     prob = model.predict_proba(input_df)[0][1]
@@ -105,7 +109,7 @@ if st.button("Analyze Attrition Risk"):
     
     with col1:
         st.subheader("Model Prediction")
-        if prob >= 0.3:
+        if prob >= config.MODEL_THRESHOLD:
             st.error(f"### High Risk: {prob*100:.1f}%")
             st.write("Targeted retention strategy required.")
         else:

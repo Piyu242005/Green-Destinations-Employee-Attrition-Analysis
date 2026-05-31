@@ -10,13 +10,14 @@ app = FastAPI(
 )
 
 import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src import config
+from src.features import engineer_features
 
 # Load the trained pipeline
 try:
-    # Use absolute path so Vercel can find it regardless of execution context
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    MODEL_PATH = os.path.join(BASE_DIR, "models", "model_pipeline.pkl")
-    model = joblib.load(MODEL_PATH)
+    model = joblib.load(config.MODEL_PIPELINE_PATH)
 except Exception as e:
     print(f"Error loading model: {e}")
     model = None
@@ -39,14 +40,13 @@ def predict(data: dict):
     input_df = pd.DataFrame([data])
     
     # Apply same feature engineering as training
-    input_df['IncomePerAge'] = input_df['MonthlyIncome'] / input_df['Age']
-    input_df['TenureRatio'] = input_df['YearsAtCompany'] / (input_df['TotalWorkingYears'] + 1)
+    input_df = engineer_features(input_df)
     
     # Get probability
     prob = model.predict_proba(input_df)[0][1]
     
     # Prediction based on tuned threshold
-    threshold = 0.3
+    threshold = config.MODEL_THRESHOLD
     risk_level = "High" if prob >= threshold else "Low"
     
     return {
