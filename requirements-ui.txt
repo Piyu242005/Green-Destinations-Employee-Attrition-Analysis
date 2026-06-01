@@ -4,3 +4,5 @@ pandas
 matplotlib
 joblib
 numpy
+scikit-learn
+imbalanced-learn
