@@ -1,1 +1,8 @@
--r requirements-ui.txt
+streamlit
+shap
+pandas
+matplotlib
+joblib
+numpy
+scikit-learn
+imbalanced-learn
