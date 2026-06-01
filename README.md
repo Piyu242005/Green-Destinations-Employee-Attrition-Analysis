@@ -19,6 +19,8 @@
 
 Employee attrition is a critical challenge for modern businesses. High turnover rates not only incur significant recruitment and training costs but also disrupt team productivity. This project delivers a **Strategic HR Intelligence System** that doesn't just predict "who" might leave, but explains **"why"** using Explainable AI (SHAP), allowing for targeted interventions.
 
+![Project Objective](Project%20Objective.jpg)
+
 ---
 
 ## 🏗️ System Architecture
@@ -141,8 +143,7 @@ Green-Destinations-Employee-Attrition-Analysis/
 ├── tests/              # Unit Tests
 │   ├── test_api.py
 │   └── test_features.py
-├── requirements-api.txt # Backend dependencies
-├── requirements-ui.txt  # Frontend dependencies
+├── requirements.txt     # Consolidated backend, frontend, and ML dependencies
 ├── requirements-dev.txt # Testing dependencies
 └── Dockerfile          # Containerization for deployment
 ```
@@ -154,11 +155,8 @@ Green-Destinations-Employee-Attrition-Analysis/
 
 ### 1. Install Dependencies
 ```bash
-# For API and Model Training
-pip install -r requirements-api.txt
-
-# For Streamlit UI
-pip install -r requirements-ui.txt
+# Install all required application dependencies
+pip install -r requirements.txt
 
 # For Testing
 pip install -r requirements-dev.txt
